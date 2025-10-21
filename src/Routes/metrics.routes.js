@@ -6,7 +6,7 @@ import upload from '../Middlewares/multer.middleware.js';
 
 let metrics = express.Router()
 
-metrics.get("/getReferedCandidates/:userId", getReferedCandidates);
+metrics.get("/getReferedCandidates/:userId",auth, getReferedCandidates);
 
 
 

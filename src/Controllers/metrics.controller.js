@@ -27,13 +27,16 @@ export let getReferedCandidates = async (req, res) => {
         if (candidates.length == 0) {
             return res.status(200).json({
                 status: false,
-                message: "Candidate Data Fetched Sucessfully",
-                data: null
+                message: "Candidate Not Found",
+                data: {
+                    candidates: [],
+                    totalCandidates: 0
+                }
             });
         } else {
             return res.status(200).json({
-                status: false,
-                message: "Candidate Not Found",
+                status: true,
+                message: "Candidate Data Fetched Sucessfully",
                 data: {
                     candidates: candidates,
                     totalCandidates: candidates.length

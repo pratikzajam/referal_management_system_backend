@@ -49,13 +49,12 @@ export let signup = async (req, res) => {
             })
         }
 
-        let result = owasp.test(password);
 
-        if (!result.strong) {
+        if (password.length < 8) {
             return res.status(404).json({
                 status: false,
-                message: "The Current Password Does Not Match Required Criteria",
-                data: result
+                message: "password must be at least 8 characters long",
+                data: null
             })
         }
 
@@ -145,15 +144,15 @@ export let login = async (req, res) => {
 
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: process.env.ENVIRONMENT === "production",
-                sameSite: "strict",
+                secure: false,
+                sameSite: "Lax",
                 maxAge: 24 * 60 * 60 * 1000,
             });
 
             let user = userData
 
             return res.status(200).json({
-                status: false,
+                status: true,
                 message: "Logged In Sucessfully",
                 data: userData
             })

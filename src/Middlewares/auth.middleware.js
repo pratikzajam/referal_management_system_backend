@@ -3,9 +3,10 @@ import jwt from 'jsonwebtoken';
 const auth = (req, res, next) => {
     try {
       
-        const token = req.headers.authorization?.split(' ')[1] || req.headers.token;
-
-        console.log(req.headers.authorization)
+        const token =
+            req.headers.authorization?.split(' ')[1] ||  
+            req.headers.token ||                         
+            req.cookies?.token;                       
 
         if (!token) {
             return res.status(401).json({
@@ -15,19 +16,18 @@ const auth = (req, res, next) => {
             });
         }
 
-       
+      
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
 
-
+       
         req.user = decoded;
 
-     
         next();
 
     } catch (error) {
         return res.status(401).json({
             status: false,
-            message:error.message,
+            message: error.message,
             data: null
         });
     }

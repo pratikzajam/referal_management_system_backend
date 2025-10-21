@@ -11,6 +11,9 @@ export let referCandidate = async (req, res) => {
         const { candidateName, email, phoneNumber, jobTitle } = req.body;
         const { userId } = req.params;
 
+
+
+
         if (!userId) {
             return res.status(409).json({
                 status: false,
@@ -19,15 +22,30 @@ export let referCandidate = async (req, res) => {
             })
         }
 
-        if (req.file.mimetype != "application/pdf") {
-            return res.status(409).json({
-                status: false,
-                message: "Uploaded file must be type of pdf",
-                data: null
-            })
+        let resume = ""
+
+        if (req.file) {
+
+
+            if (req.file.mimetype != "application/pdf") {
+
+                console.log("Type issue")
+                return res.status(409).json({
+                    status: false,
+                    message: "Uploaded file must be type of pdf",
+                    data: null
+                })
+
+            }
+
+
+            const localFilePath = req.file.path;
+
+            resume = await uploadOnCloudinary(localFilePath);
+
         }
 
-        const localFilePath = req.file.path;
+
 
         if (!candidateName || !email || !phoneNumber || !jobTitle) {
             return res.status(201).json({
@@ -40,6 +58,8 @@ export let referCandidate = async (req, res) => {
         let isEmailValid = validator.isEmail(email);
 
         if (!isEmailValid) {
+
+            console.log("Email issue")
             return res.status(409).json({
                 status: false,
                 message: "Please Enter A Valid Email",
@@ -49,7 +69,11 @@ export let referCandidate = async (req, res) => {
 
         const isMobilePhone = validator.isMobilePhone(phoneNumber, 'en-IN');
 
+        console.log(phoneNumber)
+
         if (!isMobilePhone) {
+
+            console.log("Mobile issue")
             return res.status(409).json({
                 status: false,
                 message: "Please Enter A Valid Mobile Phone",
@@ -58,7 +82,7 @@ export let referCandidate = async (req, res) => {
         }
 
 
-        let resume = await uploadOnCloudinary(localFilePath);
+
 
 
         let addCandidate = await new candidate({
@@ -66,7 +90,7 @@ export let referCandidate = async (req, res) => {
             email: email,
             phoneNumber: phoneNumber,
             jobTitle: jobTitle,
-            resume: resume.secure_url,
+            resume: resume.secure_url || "",
             refferedBy: userId
 
         }).save()
@@ -79,14 +103,18 @@ export let referCandidate = async (req, res) => {
                 data: null
             })
         } else {
+
+
             return res.status(500).json({
-                status: true,
+                status: false,
                 message: "Something Went Wrong While Adding The Candidate",
                 data: null
             })
         }
 
     } catch (error) {
+
+        console.log(error)
         return res.status(500).json({
             status: false,
             message: error.message,

@@ -8,10 +8,10 @@ let candidate = express.Router()
 
 
 
-candidate.post("/candidates/:userId", upload.single("resume"), auth, referCandidate);
-candidate.get("/candidates/:userId", auth, getAllCandidates);
-candidate.delete("/candidates/:candidateId", auth, deleteCandidate);
-candidate.put("/candidates/:candidateId", auth, updateCandidateStatus);
+candidate.post("/candidates/:userId", upload.single("resume"),auth,referCandidate);
+candidate.get("/candidates/:userId",auth, getAllCandidates);
+candidate.delete("/candidates/:candidateId",auth,deleteCandidate);
+candidate.put("/candidates/:candidateId",  auth,updateCandidateStatus);
 
 
 
