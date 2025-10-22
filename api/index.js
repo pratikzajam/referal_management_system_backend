@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 
 connectDb();
 
-const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173'];
+const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173','https://referal-management-system-frontend-six.vercel.app'];
 
 app.use(cors({
     origin: function(origin, callback){
