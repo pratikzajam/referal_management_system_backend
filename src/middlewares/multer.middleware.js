@@ -3,7 +3,8 @@ import path from 'path';
 import fs from 'fs';
 
 
-const tempDir = path.resolve('public/temp');
+const tempDir = path.join('/tmp');
+
 if (!fs.existsSync(tempDir)) {
   fs.mkdirSync(tempDir, { recursive: true });
 }
@@ -13,7 +14,6 @@ const storage = multer.diskStorage({
     cb(null, tempDir); 
   },
   filename: function (req, file, cb) {
- 
     const uniqueName = Date.now() + '-' + file.originalname;
     cb(null, uniqueName);
   },
