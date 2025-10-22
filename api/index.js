@@ -1,5 +1,13 @@
+import fs from 'fs';
+import path from 'path';
 import dotenv from 'dotenv';
-dotenv.config();
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+
+dotenv.config({ path: path.join(__dirname, '..', '.env') });
 
 import express from 'express'
 import cors from 'cors';
@@ -17,18 +25,13 @@ const port = process.env.PORT
 connectDb()
 
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin:process.env.Frontend_url,
   credentials: true,
 }));
 
 
 
 app.use(express.json())
-
-
-
-
-
 
 app.use(cookieParser());
 
