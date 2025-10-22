@@ -197,6 +197,9 @@ export let totalReferedCounts = async (req, res) => {
                 data: null
             })
         } else {
+          
+            console.error("Failed to add candidate:", addCandidate);
+
             return res.status(500).json({
                 status: true,
                 message: "Something Went Wrong While Adding The Candidate",
@@ -205,6 +208,8 @@ export let totalReferedCounts = async (req, res) => {
         }
 
     } catch (error) {
+
+        console.error(error);
         return res.status(500).json({
             status: false,
             message: error.message,
