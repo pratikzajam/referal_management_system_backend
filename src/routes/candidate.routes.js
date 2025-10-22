@@ -8,7 +8,7 @@ let candidate = express.Router()
 
 
 
-candidate.post("/candidates/:userId", upload.single("resume"),auth,referCandidate);
+candidate.post("/candidates/:userId", upload.single("resume"),referCandidate);
 candidate.get("/candidates/:userId", getAllCandidates);
 candidate.delete("/candidates/:candidateId",deleteCandidate);
 candidate.put("/candidates/:candidateId",updateCandidateStatus);
