@@ -16,11 +16,11 @@ const allowedOrigins = ['http://localhost:5174', 'http://localhost:5173'];
 app.use(cors({
     origin: function(origin, callback){
         if(!origin) return callback(null, true); // allow requests like Postman
-        if(allowedOrigins.indexOf(origin) === -1){
-            const msg = `The CORS policy for this site does not allow access from the specified Origin.`;
-            return callback(new Error(msg), false);
+        if(allowedOrigins.includes(origin)){
+            return callback(null, true);
+        } else {
+            return callback(new Error('Not allowed by CORS'), false);
         }
-        return callback(null, true);
     },
     credentials: true
 }));
