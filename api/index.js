@@ -3,11 +3,11 @@ dotenv.config();
 
 import express from 'express'
 import cors from 'cors';
-import connectDb from './src/Config/db.config.js'
+import connectDb from '../src/Config/db.config.js'
 import cookieParser from "cookie-parser";
-import user from './src/Routes/auth.routes.js';
-import candidate from './src/Routes/candidate.routes.js';
-import metrics from '../backend/src/Routes/metrics.routes.js'
+import user from '../src/Routes/auth.routes.js';
+import candidate from '../src/Routes/candidate.routes.js';
+import metrics from '../src/Routes/metrics.routes.js'
 
 
 
