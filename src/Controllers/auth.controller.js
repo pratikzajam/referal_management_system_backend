@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import owasp from 'owasp-password-strength-test';
 import bcrypt from "bcryptjs";
-import User from '../Models/User.Model.js'
+import User from '../models/user.model.js'
 import validator from 'validator';
 
 export let signup = async (req, res) => {

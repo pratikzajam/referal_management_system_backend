@@ -1,7 +1,7 @@
 import validator from 'validator';
-import candidate from '../Models/Candidate.Model.js'
+import candidate from '../models/candidate.model.js'
 import { uploadOnCloudinary } from '../utils/cloudinary.js';
-import User from '../Models/User.Model.js';
+import User from '../models/user.model.js';
 import mongoose from 'mongoose';
 
 

@@ -1,8 +1,8 @@
 import express from 'express';
-import { signup, login } from '../Controllers/auth.controller.js';
-import { referCandidate, getAllCandidates, deleteCandidate, updateCandidateStatus } from '../Controllers/Candidate.Controller.js';
-import auth from "../Middlewares/auth.middleware.js"
-import upload from '../Middlewares/multer.middleware.js';
+import { signup, login } from '../controllers/auth.controller.js';
+import { referCandidate, getAllCandidates, deleteCandidate, updateCandidateStatus } from '../controllers/candidate.controller.js';
+import auth from "../middlewares/auth.middleware.js"
+import upload from '../middlewares/multer.middleware.js';
 
 let candidate = express.Router()
 
