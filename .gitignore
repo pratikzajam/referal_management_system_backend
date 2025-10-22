@@ -25,3 +25,4 @@ build/
 
 # Cloudinary uploads/temp files
 public/temp/
+.vercel

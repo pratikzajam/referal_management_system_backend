@@ -142,13 +142,17 @@ export let login = async (req, res) => {
 
             let token = jwt.sign({ id: userData._id, name: userData.name, email: userData.email }, process.env.SECRET_KEY);
 
+            const isProduction = process.env.NODE_ENV === "production";
+
+            console.log(isProduction)
+
             res.cookie("token", token, {
                 httpOnly: true,
-                secure: false,
-                sameSite: "Lax",
+                secure: true,         
+                sameSite: "Lax",      
                 maxAge: 24 * 60 * 60 * 1000,
+                path: "/",          
             });
-
             let user = userData
 
             return res.status(200).json({
